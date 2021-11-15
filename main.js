@@ -56,11 +56,11 @@ loader.load("./model/scene.gltf", function (gltf) {
 //Doll animation
 function lookBackward() {
   gsap.to(doll.rotation, { duration: 0.45, y: -3.15 });
-  setTimeout(() => (dallFacingBack = true), 150);
+  setTimeout(() => (dollFacingBack = true), 150);
 }
 function lookForward() {
   gsap.to(doll.rotation, { duration: 0.45, y: 0 });
-  setTimeout(() => (dallFacingBack = false), 450);
+  setTimeout(() => (dollFacingBack = false), 450);
 }
 
 //set path

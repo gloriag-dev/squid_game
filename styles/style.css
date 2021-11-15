@@ -15,7 +15,15 @@ body{
     font-size: 50px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
+.red{
+    color: red;
+    font-weight: bold;
+}
 
+.green{
+    color: green;
+    font-weight: bold;
+}
 .modal{
     position: fixed;
     top: 0;
