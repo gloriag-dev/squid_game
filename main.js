@@ -44,6 +44,10 @@ let SAFE_PLAYERS = 0;
 //start!!
 const startBtn = document.querySelector(".start-btn");
 
+//restart
+const restartBtn = document.querySelector(".restart-btn");
+var playAgainWithMe;
+
 //load Doll from model
 loader.load("./model/scene.gltf", function (gltf) {
   scene.add(gltf.scene);
@@ -181,6 +185,7 @@ async function init() {
   await delay(500);
   text.innerText = "Gooo!!!";
   start();
+  console.log("I'm in init");
 }
 
 let gameStat = "loading";
@@ -188,16 +193,19 @@ let gameStat = "loading";
 function start() {
   gameStat = "started";
   const progressBar = createCube({ w: 8, h: 0.1, d: 1 }, 0, 0, 0xebaa12);
+  console.log("CUBE");
   progressBar.position.y = 3.35;
+  progressBar.scale = 1;
   gsap.to(progressBar.scale, { duration: TIME_LIMIT, x: 0, ease: "none" });
   setTimeout(() => {
     if (gameStat != "ended") {
       text.innerText = "Time Out!!!";
-      loseMusic.play();
+      restartGame();
       gameStat = "ended";
     }
   }, TIME_LIMIT * 1000);
   startDoll();
+  console.log("I'm in start function");
 }
 
 let dollFacingBack = true;
@@ -215,6 +223,21 @@ startBtn.addEventListener("click", () => {
     document.querySelector(".modal").style.display = "none";
   }
 });
+
+function restartGame() {
+  restartBtn.addEventListener("click", () => {
+    document.querySelector(".modal-end-restart").style.display = "none";
+  });
+  document.querySelector(".modal-end-restart").style.display = "flex";
+  let playAgainWithMe = true;
+  if (playAgainWithMe) {
+    console.log("play again");
+    setTimeout(() => {
+      init();
+      console.log("here!!!!");
+    }, 7000);
+  }
+}
 
 function animate() {
   renderer.render(scene, camera);
