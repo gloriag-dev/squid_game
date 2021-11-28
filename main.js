@@ -185,7 +185,6 @@ async function init() {
   await delay(500);
   text.innerText = "Gooo!!!";
   start();
-  console.log("I'm in init");
 }
 
 let gameStat = "loading";
@@ -193,19 +192,15 @@ let gameStat = "loading";
 function start() {
   gameStat = "started";
   const progressBar = createCube({ w: 8, h: 0.1, d: 1 }, 0, 0, 0xebaa12);
-  console.log("CUBE");
   progressBar.position.y = 3.35;
   progressBar.scale = 1;
   gsap.to(progressBar.scale, { duration: TIME_LIMIT, x: 0, ease: "none" });
   setTimeout(() => {
     if (gameStat != "ended") {
       text.innerText = "Time Out!!!";
-      restartGame();
-      gameStat = "ended";
     }
   }, TIME_LIMIT * 1000);
   startDoll();
-  console.log("I'm in start function");
 }
 
 let dollFacingBack = true;
@@ -231,10 +226,16 @@ function restartGame() {
   document.querySelector(".modal-end-restart").style.display = "flex";
   let playAgainWithMe = true;
   if (playAgainWithMe) {
-    console.log("play again");
     setTimeout(() => {
       init();
-      console.log("here!!!!");
+      createCube(
+        { w: start_position * 2 + 0.21, h: 1.5, d: 1 },
+        0,
+        0,
+        0xe5a716
+      ).position.z = -1;
+      createCube({ w: 0.2, h: 1.5, d: 1 }, start_position, -0.4);
+      createCube({ w: 0.2, h: 1.5, d: 1 }, end_position, 0.4);
     }, 7000);
   }
 }
